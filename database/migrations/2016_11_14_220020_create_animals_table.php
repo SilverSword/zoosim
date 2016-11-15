@@ -15,10 +15,11 @@ class CreateAnimalsTable extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('animal_id');
+            $table->integer('specie_id');
             $table->integer('zoo_id');
             $table->float('current_health');
             $table->boolean('is_dead');
+            $table->boolean('warning');
             $table->timestamps();
         });
     }

@@ -1,21 +1,43 @@
 <?php
 
-namespace ZooSim;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Animal extends Model
 {
-    /**
-    * Get the zoo that this animal belongs to
-    */
     public function zoo()
     {
-        return $this->belongsTo('ZooSim\Zoo');
+        return $this->belongsTo('App\Zoo');
     }
-    
+
     public function specie()
     {
-        return $this->belongsTo('ZooSim\Specie');
+        return $this->belongsTo('App\Species');
+    }
+
+    public static function getAnimal($name)
+    {
+        return $this->species()->where('name', $name)->all();
+    }
+
+    public function elephants()
+    {
+        return getAnimal('Elephant');
+    }
+
+    public function giraffes()
+    {
+        return getAnimal('Giraffe');
+    }
+
+    public function monkeys()
+    {
+        return getAnimal('Monkey');
+    }
+
+    public function returnAnimals()
+    {
+        return $this->species()->orderBy('name', 'asc');
     }
 }

@@ -15,7 +15,7 @@ class CreateZoosTable extends Migration
     {
         Schema::create('zoos', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('simulation_time');
+            $table->time('start_time');
             $table->timestamps();
         });
     }

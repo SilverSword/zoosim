@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Species;
+use App\Animal;
+use App\Zoo;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::get('/init','ZooController@initialize')->name('init');
+Route::get('/feed', 'ZooController@feed')->name('feed');
+Route::get('/advance', 'ZooController@advanceTime')->name('advanceTime');
+Route::get('/time', function () {
+    $zoo = Zoo::first();
+    return floor(Carbon::parse($zoo->start_time)->diffInSeconds()/3600);
+})->name('simTime');
